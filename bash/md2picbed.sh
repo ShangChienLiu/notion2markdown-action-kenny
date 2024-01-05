@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# 添加一個函數來控制請求速率
+function limit_request_rate() {
+    # 每次請求等待1秒
+    sleep 1
+}
+
 # 检查参数是否小于3个
 if [ $# -lt 2 ]; then
     echo "使用方法: $0 <Markdown文件路径> <picBed JSON Config> <图床URL>"
@@ -226,6 +232,9 @@ img_upload_successed=()
 # 遍历所有图片链接
 
 for image_url in ${all_image_urls[@]}; do
+    # 控制請求速率
+    limit_request_rate
+
     # 判断图片是否为本地图片，如果是本地图片，则直接压缩，否则先下载到本地
     if echo $image_url | grep -qi "http"; then
         # 下载图片到临时目录
