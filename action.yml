@@ -1,4 +1,4 @@
-name: 'notion2markdown-action'
+name: 'notion2markdown-action-kenny'
 description: |
   将 notion database 中的 page 转换为 markdown 文档, 可以用于 hexo、hugo 等静态博客构建, 内置picgo-core,使用picBed上传图床。
 inputs:
@@ -104,3 +104,5 @@ outputs:
 runs:
   using: 'node16'
   main: 'dist/index.js'
+
+
