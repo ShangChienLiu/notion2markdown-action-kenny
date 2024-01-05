@@ -3,7 +3,7 @@
 # 添加一個函數來控制請求速率
 function limit_request_rate() {
     # 每次請求等待1秒
-    sleep 5
+    sleep 10
 }
 
 # 检查参数是否小于3个
