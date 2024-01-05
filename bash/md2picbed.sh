@@ -2,8 +2,28 @@
 
 # 添加一個函數來控制請求速率
 function limit_request_rate() {
-    # 每次請求等待10秒
-    sleep 10
+    # 每次請求等待15秒
+    sleep 15
+}
+
+# 添加一個函數來處理競爭條件，使用文件鎖
+function handle_concurrency() {
+    # 設置一個文件鎖的路徑
+    lockfile="/tmp/script_lockfile.lock"
+
+    # 嘗試鎖定文件，如果文件已經被鎖定，則等待，直到可以鎖定為止
+    while true; do
+        if mkdir "$lockfile"; then
+            break
+        else
+            sleep 1
+        fi
+    done
+
+    # 執行需要同步的操作
+
+    # 釋放文件鎖
+    rmdir "$lockfile"
 }
 
 # 检查参数是否小于3个
@@ -234,6 +254,9 @@ img_upload_successed=()
 for image_url in ${all_image_urls[@]}; do
     # 控制請求速率
     limit_request_rate
+
+    # 處理競爭條件
+    handle_concurrency
 
     # 判断图片是否为本地图片，如果是本地图片，则直接压缩，否则先下载到本地
     if echo $image_url | grep -qi "http"; then
