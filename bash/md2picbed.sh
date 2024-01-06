@@ -3,7 +3,7 @@
 # 添加一個函數來控制請求速率
 function limit_request_rate() {
     # 每次請求等待60秒
-    sleep 60
+    sleep 70
 }
 
 # 添加一個函數來處理競爭條件，使用文件鎖
