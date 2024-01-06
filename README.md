@@ -305,5 +305,5 @@ jobs:
 
 This action is licensed under the MIT License. See the [LICENSE](https://github.com/Doradx/notion2markdown-action/blob/main/LICENSE) file for details.
 
-## Author
+## Great Thanks
 Dorad, ddxid@outlook.com
