@@ -313,6 +313,17 @@ async function embed(block) {
                 }
                 iframe = `<iframe src="${url}" style="width: 100%; margin:0; aspect-ratio: 16/9;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
                 break;
+            case "drive.google.com":
+                // check if the url is embed and PDF
+                if (!url.includes("file")) {
+                    console.error("PDF file block with unsupported google url: ", url);
+                    return false;
+                }
+                const url = getUrlFromFileOrExternalBlock(pdf, 'pdf');
+                if (!url) return false;
+                iframe = `<iframe src="${url}" style="width: 100%; margin:0; aspect-ratio: 16/9;"></iframe>`;
+                const caption_div = caption ? CAPTION_DIV_TEMPLATE.replace("{{caption}}", caption) : "";
+                iframe =  `<div class="embed">${iframe}${caption_div}</div>`;
             default:
                 console.warn("Embed block with unsupported domain, url: ", url);
                 iframe = `<iframe src="${url}" style="width: 100%; margin:0; aspect-ratio: 16/9;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
